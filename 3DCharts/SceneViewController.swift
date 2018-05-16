@@ -20,13 +20,12 @@ class SceneViewController : UIViewController, SCNSceneRendererDelegate {
     var chartNode:SCNNode!
     var cameraNode:SCNNode!
     let data = ExampleData()
-    
-    
+
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
         // Custom initialization
     }
-    
+
     required init?(coder aDecoder: NSCoder) {
         super.init(coder:aDecoder)
     }
@@ -35,7 +34,7 @@ class SceneViewController : UIViewController, SCNSceneRendererDelegate {
         super.init(nibName:nil, bundle:nil)
         self.chartType = type
     }
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         scnView = SCNView(frame:self.view.frame)
@@ -44,63 +43,63 @@ class SceneViewController : UIViewController, SCNSceneRendererDelegate {
         
         // Create a bottom space constraint
         var constraint = NSLayoutConstraint (item: scnView,
-                                             attribute: NSLayoutAttribute.bottom,
-                                             relatedBy: NSLayoutRelation.equal,
+                                             attribute: .bottom,
+                                             relatedBy: .equal,
                                              toItem: self.view,
-                                             attribute: NSLayoutAttribute.bottom,
+                                             attribute: .bottom,
                                              multiplier: 1,
                                              constant: 0)
         self.view.addConstraint(constraint)
         // Create a top space constraint
         constraint = NSLayoutConstraint (item: scnView,
-                                         attribute: NSLayoutAttribute.top,
-                                         relatedBy: NSLayoutRelation.equal,
+                                         attribute: .top,
+                                         relatedBy: .equal,
                                          toItem: self.view,
-                                         attribute: NSLayoutAttribute.top,
+                                         attribute: .top,
                                          multiplier: 1,
                                          constant: 0)
         self.view.addConstraint(constraint)
-        
+
         // Create a right space constraint
         constraint = NSLayoutConstraint (item: scnView,
-                                         attribute: NSLayoutAttribute.right,
-                                         relatedBy: NSLayoutRelation.equal,
+                                         attribute: .right,
+                                         relatedBy: .equal,
                                          toItem: self.view,
-                                         attribute: NSLayoutAttribute.right,
+                                         attribute: .right,
                                          multiplier: 1,
                                          constant: 0)
         self.view.addConstraint(constraint)
         // Create a left space constraint
         constraint = NSLayoutConstraint (item: scnView,
-                                         attribute: NSLayoutAttribute.left,
-                                         relatedBy: NSLayoutRelation.equal,
+                                         attribute: .left,
+                                         relatedBy: .equal,
                                          toItem: self.view,
-                                         attribute: NSLayoutAttribute.left,
+                                         attribute: .left,
                                          multiplier: 1,
                                          constant: 0)
         self.view.addConstraint(constraint)
 
         scnView.delegate = self
-        
+
         // create a new scene
         scene = SCNScene()
-        
+
         // create and add a camera to the scene
         cameraNode = SCNNode()
         cameraNode.camera = SCNCamera()
         scene.rootNode.addChildNode(cameraNode)
-        
+
         // place the camera
         cameraNode.position = SCNVector3(x: 0, y: 40, z: 70)
         cameraNode.rotation = SCNVector4(x: 1, y: 0, z: 0, w: Float(-M_PI_4*0.25))
-        
+
         // create and add a light to the scene
         let lightNode = SCNNode()
         lightNode.light = SCNLight()
         lightNode.light?.type = SCNLight.LightType.omni
         lightNode.position = SCNVector3(x: 0, y: 10, z: 15)
         scene.rootNode.addChildNode(lightNode)
-        
+
         //create and add an ambient light to the scene
         let ambientLightNode = SCNNode()
         ambientLightNode.light = SCNLight()
@@ -110,21 +109,21 @@ class SceneViewController : UIViewController, SCNSceneRendererDelegate {
 
         // set the scene to the view
         scnView.scene = scene
-        
+
         // allows the user to manipulate the camera
         scnView.allowsCameraControl = true
-        
+
         // show statistics such as fps and timing information
         //scnView.showsStatistics = true
-        
+
         // configure the view
-        scnView.backgroundColor = UIColor.black
-        
+        scnView.backgroundColor = .black
+
         //setup overlay
         let overlayScene:OverlayScene = OverlayScene(size: scnView.bounds.size);
         scnView.overlaySKScene = overlayScene;
         overlayScene.cameraButtonHandler = handleCameraButtonPressed
-        
+
         showData()
     }
     
@@ -229,8 +228,12 @@ class SceneViewController : UIViewController, SCNSceneRendererDelegate {
             let endDeg = startDeg + pct - 1.0
             let endRad:Float = Float(endDeg) * Float(M_PI) / Float(180.0)
             let circlePath = UIBezierPath()
-            circlePath.move(to: CGPoint.zero)
-            circlePath.addArc(withCenter: CGPoint.zero, radius: 20.0, startAngle:CGFloat(startRad), endAngle: CGFloat(endRad), clockwise: true)
+            circlePath.move(to: .zero)
+            circlePath.addArc(withCenter: .zero,
+                              radius: 20.0,
+                              startAngle:CGFloat(startRad),
+                              endAngle: CGFloat(endRad),
+                              clockwise: true)
             startDeg = endDeg + 1
             let node = SCNNode(geometry: SCNShape(path:circlePath, extrusionDepth: 5.0))
             node.geometry?.firstMaterial?.diffuse.contents = data.colorForIndexPath(row: i, column: j)
@@ -257,8 +260,8 @@ class SceneViewController : UIViewController, SCNSceneRendererDelegate {
         
         var animValues = [NSValue]()
         for index in 0 ..< 360 {
-            let hAngle = Double(index) * M_PI / 180.0
-            let vAngle = Double(-45) * 0.25 * M_PI / 180.0
+            let hAngle = Double(index) * .pi / 180.0
+            let vAngle = Double(-45) * 0.25 * .pi / 180.0
             let val = NSValue(caTransform3D: transformationToRotateAroundPosition(node.position, radius:radius, horizontalAngle:Float(hAngle), verticalAngle:Float(vAngle)))
             animValues.append(val)
         }

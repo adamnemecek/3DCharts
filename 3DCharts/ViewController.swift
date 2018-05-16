@@ -33,46 +33,46 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         self.title = "Chart Types"
         tableView = UITableView()
         tableView.translatesAutoresizingMaskIntoConstraints = false
-        tableView.frame = CGRect.zero
+        tableView.frame = .zero
         tableView.dataSource = self
         tableView.delegate = self
         self.view.addSubview(tableView)
         
         // Create a bottom space constraint
-        var constraint = NSLayoutConstraint (item: tableView,
-                                             attribute: NSLayoutAttribute.bottom,
-                                             relatedBy: NSLayoutRelation.equal,
-                                             toItem: self.view,
-                                             attribute: NSLayoutAttribute.bottom,
-                                             multiplier: 1,
-                                             constant: 0)
+        var constraint = NSLayoutConstraint(item: tableView,
+                                            attribute: .bottom,
+                                            relatedBy: .equal,
+                                            toItem: self.view,
+                                            attribute: .bottom,
+                                            multiplier: 1,
+                                            constant: 0)
         self.view.addConstraint(constraint)
         // Create a top space constraint
-        constraint = NSLayoutConstraint (item: tableView,
-                                         attribute: NSLayoutAttribute.top,
-                                         relatedBy: NSLayoutRelation.equal,
-                                         toItem: self.view,
-                                         attribute: NSLayoutAttribute.top,
-                                         multiplier: 1,
-                                         constant: 0)
+        constraint = NSLayoutConstraint(item: tableView,
+                                        attribute: .top,
+                                        relatedBy: .equal,
+                                        toItem: self.view,
+                                        attribute: .top,
+                                        multiplier: 1,
+                                        constant: 0)
         self.view.addConstraint(constraint)
         // Create a right space constraint
-        constraint = NSLayoutConstraint (item: tableView,
-                                         attribute: NSLayoutAttribute.right,
-                                         relatedBy: NSLayoutRelation.equal,
-                                         toItem: self.view,
-                                         attribute: NSLayoutAttribute.right,
-                                         multiplier: 1,
-                                         constant: 0)
+        constraint = NSLayoutConstraint(item: tableView,
+                                        attribute: .right,
+                                        relatedBy: .equal,
+                                        toItem: self.view,
+                                        attribute: .right,
+                                        multiplier: 1,
+                                        constant: 0)
         self.view.addConstraint(constraint)
         // Create a left space constraint
-        constraint = NSLayoutConstraint (item: tableView,
-                                         attribute: NSLayoutAttribute.left,
-                                         relatedBy: NSLayoutRelation.equal,
-                                         toItem: self.view,
-                                         attribute: NSLayoutAttribute.left,
-                                         multiplier: 1,
-                                         constant: 0)
+        constraint = NSLayoutConstraint(item: tableView,
+                                        attribute: .left,
+                                        relatedBy: .equal,
+                                        toItem: self.view,
+                                        attribute: .left,
+                                        multiplier: 1,
+                                        constant: 0)
         self.view.addConstraint(constraint)
         
         cylinderChartSceneController = SceneViewController(type:ChartType.cylinder)
@@ -87,9 +87,9 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let CellIdentifier = "CellIdentifier"
-        let cell = UITableViewCell(style: UITableViewCellStyle.default, reuseIdentifier: CellIdentifier)
+        let cell = UITableViewCell(style: .default, reuseIdentifier: CellIdentifier)
         
-        cell.accessoryType = UITableViewCellAccessoryType.disclosureIndicator
+        cell.accessoryType = .disclosureIndicator
         
         let cellText = chartTypes[(indexPath as NSIndexPath).row]
         cell.textLabel!.text = cellText
