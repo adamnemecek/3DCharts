@@ -13,15 +13,14 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     var cylinderChartSceneController:SceneViewController!
     var cubeChartSceneController:SceneViewController!
     var pieChartSceneController:SceneViewController!
-    
+
     let chartTypes:[String] = ["Cylinder Charts", "Cube Charts", "Pie Charts"]
-  
-    
+
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
         // Custom initialization
     }
-    
+
     required init?(coder aDecoder: NSCoder) {
         super.init(coder:aDecoder)
     }
@@ -29,7 +28,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
-        
+
         self.title = "Chart Types"
         tableView = UITableView()
         tableView.translatesAutoresizingMaskIntoConstraints = false
@@ -37,7 +36,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         tableView.dataSource = self
         tableView.delegate = self
         self.view.addSubview(tableView)
-        
+
         // Create a bottom space constraint
         var constraint = NSLayoutConstraint(item: tableView,
                                             attribute: .bottom,
@@ -74,23 +73,23 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
                                         multiplier: 1,
                                         constant: 0)
         self.view.addConstraint(constraint)
-        
+
         cylinderChartSceneController = SceneViewController(type:ChartType.cylinder)
         cubeChartSceneController = SceneViewController(type:ChartType.cube)
         pieChartSceneController = SceneViewController(type:ChartType.pie)
     }
 
-    
+
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return chartTypes.count
     }
-    
+
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let CellIdentifier = "CellIdentifier"
         let cell = UITableViewCell(style: .default, reuseIdentifier: CellIdentifier)
-        
+
         cell.accessoryType = .disclosureIndicator
-        
+
         let cellText = chartTypes[(indexPath as NSIndexPath).row]
         cell.textLabel!.text = cellText
         return cell
@@ -105,7 +104,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
             self.navigationController?.pushViewController(pieChartSceneController, animated:false)
         }
     }
-    
+
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.

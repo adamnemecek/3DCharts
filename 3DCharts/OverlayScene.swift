@@ -12,25 +12,25 @@ class OverlayScene : SKScene {
     // closure for handling camera button presses
     var cameraButtonHandler : (() -> ())?
     var cameraNode:SKSpriteNode!
-    
+
     override init() {
         super.init()
         setup()
     }
-    
+
     override init(size: CGSize) {
         super.init(size: size)
         setup()
     }
-    
+
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         setup()
     }
-    
+
     private func setup () {
-        self.scaleMode = SKSceneScaleMode.resizeFill
-        
+        self.scaleMode = .resizeFill
+
         //add the camera button
         cameraNode = SKSpriteNode(imageNamed:"art.scnassets/video_camera.png")
         cameraNode.position = CGPoint(x: size.width * 0.85, y: size.height*0.85)
@@ -38,13 +38,12 @@ class OverlayScene : SKScene {
         cameraNode.xScale = 0.4
         cameraNode.yScale = 0.4
         self.addChild(cameraNode)
-
     }
-    
+
     override func didChangeSize(_ oldSize: CGSize) {
         cameraNode?.position = CGPoint(x: self.frame.size.width * 0.85, y: self.frame.size.height*0.85)
     }
-    
+
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         let touch:UITouch = touches.first! as UITouch
         let location:CGPoint = touch.location(in: scene!)
@@ -56,6 +55,4 @@ class OverlayScene : SKScene {
             }
         }
     }
-        
-
 }
